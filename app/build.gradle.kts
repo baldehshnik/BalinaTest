@@ -42,6 +42,8 @@ android {
 
 dependencies {
 
+    implementation(libs.androidx.datastore)
+
     implementation(libs.androidx.room)
     ksp(libs.androidx.room.compiler)
 
