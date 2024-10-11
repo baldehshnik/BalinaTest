@@ -27,13 +27,17 @@ class LoginDataRepository @Inject constructor(
     override suspend fun signIn(userModel: UserModel): Answer<TokenModel> = safeApiCall(ioDispatcher) {
         ApiResponseHandler(service.signIn(userFactory.mapFrom(userModel)), ::handleSignInExceptionCode)
             .handleFetchedData()
-            .suspendMap(tokenFactory::mapTo)
+            .suspendMap {
+                tokenFactory.mapTo(it.data)
+            }
     }
 
     override suspend fun signUp(userModel: UserModel): Answer<TokenModel> = safeApiCall(ioDispatcher) {
         ApiResponseHandler(service.signUp(userFactory.mapFrom(userModel)), ::handleSignUpExceptionCode)
             .handleFetchedData()
-            .suspendMap(tokenFactory::mapTo)
+            .suspendMap {
+                tokenFactory.mapTo(it.data)
+            }
     }
 }
 

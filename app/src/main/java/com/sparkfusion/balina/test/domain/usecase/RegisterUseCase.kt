@@ -25,7 +25,7 @@ class RegisterUseCase @Inject constructor(
                     session.saveUserUsername(tokenModel.login)
                     session.saveUserToken(tokenModel.token)
                 } catch (e: FailedDataStoreOperationException) {
-                    return@withContext Answer.Failure(e)
+                    return@withContext Answer.Success(Unit)
                 }
             }
             .onFailure {

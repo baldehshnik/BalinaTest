@@ -1,5 +1,6 @@
 package com.sparkfusion.balina.test.data.common
 
+import android.util.Log
 import com.sparkfusion.balina.test.utils.common.Answer
 import com.sparkfusion.balina.test.utils.exception.BadRequestException
 import com.sparkfusion.balina.test.utils.exception.BalinaException
@@ -19,6 +20,7 @@ suspend fun <T> safeApiCall(
     try {
         call.invoke()
     } catch (exception: Exception) {
+        Log.i("TAGTAG", exception.message.toString())
         handleApiException(exception)
     }
 }
@@ -31,6 +33,7 @@ fun handleSignInExceptionCode(code: Int): BalinaException {
 }
 
 fun handleSignUpExceptionCode(code: Int): BalinaException {
+    Log.i("TAGTAG", "code - $code")
     return when (code) {
         400 -> LoginAlreadyExistsException()
         else -> UnexpectedException()

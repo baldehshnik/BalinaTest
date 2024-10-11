@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-private const val BASE_URL = ""
+private const val BASE_URL = "https://junior.balinasoft.com/"
 
 @Module
 @InstallIn(SingletonComponent::class)

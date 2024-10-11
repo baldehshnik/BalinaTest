@@ -17,7 +17,7 @@
         android:theme="@style/Theme.BalinaTest"
         tools:targetApi="31">
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.window.activity.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.BalinaTest.NoActionBar">
             <intent-filter>

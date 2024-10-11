@@ -13,7 +13,9 @@ class ApiResponseHandler<R>(
     fun handleFetchedData(): Answer<R> {
         return if (response.isSuccessful) {
             val body = response.body()
-            if (body == null) Answer.Failure(UnexpectedException())
+            if (body == null) {
+                Answer.Failure(UnexpectedException())
+            }
             else Answer.Success(body)
         } else {
             Answer.Failure(handleExceptionCode(response.code()))

@@ -8,7 +8,7 @@ import com.sparkfusion.balina.test.utils.dispatchers.IODispatcher
 import com.sparkfusion.balina.test.utils.exception.FailedDataStoreOperationException
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -21,12 +21,11 @@ class LoginUseCase @Inject constructor(
 
     suspend operator fun invoke(user: UserModel): Answer<Unit> = withContext(ioDispatcher) {
         try {
-            session.readUsername().collectLatest {
-                if (it.isNotEmpty()) session.clearUsername()
-            }
-            session.readUserToken().collectLatest {
-                if (it.isNotEmpty()) session.clearUserToken()
-            }
+            val username = session.readUsername().firstOrNull()
+            if (!username.isNullOrEmpty()) session.clearUsername()
+
+            val token = session.readUserToken().firstOrNull()
+            if (!token.isNullOrEmpty()) session.clearUserToken()
 
             loginRepository.signIn(user)
                 .onSuccess { tokenModel ->
@@ -37,7 +36,7 @@ class LoginUseCase @Inject constructor(
                     return@withContext Answer.Failure(it)
                 }
         } catch (e: FailedDataStoreOperationException) {
-            return@withContext Answer.Failure(e)
+            return@withContext Answer.Success(Unit)
         }
 
         Answer.Success(Unit)

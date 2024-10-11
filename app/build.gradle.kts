@@ -42,6 +42,8 @@ android {
 
 dependencies {
 
+    implementation(libs.bumptech.glide)
+
     implementation(libs.androidx.datastore)
 
     implementation(libs.androidx.room)
