@@ -1,18 +1,18 @@
-package com.sparkfusion.balina.test.ui.gallery
+package com.sparkfusion.balina.test.ui.auth.signin
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import com.sparkfusion.balina.test.databinding.FragmentGalleryBinding
+import com.sparkfusion.balina.test.databinding.FragmentSigninBinding
 import com.sparkfusion.balina.test.ui.exception.ViewBindingIsNullException
 
-class GalleryFragment : Fragment() {
+class SignInFragment : Fragment() {
 
-    private var _binding: FragmentGalleryBinding? = null
-    private val binding get() = checkNotNull(_binding) {
+    private var _viewBinding: FragmentSigninBinding? = null
+    private val viewBinding: FragmentSigninBinding
+        get() = checkNotNull(_viewBinding) {
         throw ViewBindingIsNullException()
     }
 
@@ -20,17 +20,19 @@ class GalleryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentGalleryBinding.inflate(inflater, container, false)
-        return binding.root
+        _viewBinding = FragmentSigninBinding.inflate(inflater, container, false)
+        return viewBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.recyclerView.layoutManager = GridLayoutManager(context, 3)
+        viewBinding.buttonLogin.setOnClickListener {
+
+        }
     }
 
     override fun onDestroyView() {
+        _viewBinding = null
         super.onDestroyView()
-        _binding = null
     }
 }
