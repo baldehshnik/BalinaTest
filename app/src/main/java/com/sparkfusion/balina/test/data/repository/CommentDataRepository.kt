@@ -9,6 +9,8 @@ import com.sparkfusion.balina.test.data.common.commonHandleExceptionCode
 import com.sparkfusion.balina.test.data.common.safeApiCall
 import com.sparkfusion.balina.test.data.datasource.CommentApiService
 import com.sparkfusion.balina.test.data.datasource.CommentsPagingSource
+import com.sparkfusion.balina.test.data.datasource.local.CommentDao
+import com.sparkfusion.balina.test.data.entity.comment.LocalCommentEntity
 import com.sparkfusion.balina.test.domain.mapper.comment.CreateCommentFactory
 import com.sparkfusion.balina.test.domain.mapper.comment.GetCommentFactory
 import com.sparkfusion.balina.test.domain.model.comment.CreateCommentModel
@@ -27,7 +29,8 @@ class CommentDataRepository @Inject constructor(
     @IODispatcher private val ioDispatcher: CoroutineDispatcher,
     private val commentApiService: CommentApiService,
     private val getCommentFactory: GetCommentFactory,
-    private val createCommentFactory: CreateCommentFactory
+    private val createCommentFactory: CreateCommentFactory,
+    private val commentDao: CommentDao
 ) : ICommentRepository {
 
     override suspend fun saveComment(imageId: Int, comment: CreateCommentModel): Answer<Unit> =
@@ -46,7 +49,11 @@ class CommentDataRepository @Inject constructor(
             ),
             pagingSourceFactory = { CommentsPagingSource(commentApiService, imageId) }
         ).flow.map { pagingData ->
-            pagingData.map(getCommentFactory::mapTo)
+            pagingData.map {
+                val localComment = LocalCommentEntity(it.id, it.text, it.date, imageId)
+                commentDao.insertComment(localComment).toString()
+                getCommentFactory.mapTo(it)
+            }
         }
     }
 
