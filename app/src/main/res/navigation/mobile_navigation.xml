@@ -7,24 +7,41 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.sparkfusion.balina.test.ui.home.HomeFragment"
+        android:name="com.sparkfusion.balina.test.ui.screen.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.sparkfusion.balina.test.ui.gallery.GalleryFragment"
+        android:name="com.sparkfusion.balina.test.ui.screen.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+
+        <action
+            android:id="@+id/action_galleryFragment_to_imageInfoFragment"
+            app:destination="@id/imageInfoFragment" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.sparkfusion.balina.test.ui.slideshow.SlideshowFragment"
+        android:name="com.sparkfusion.balina.test.ui.screen.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
 
     <fragment
         android:id="@+id/nav_auth"
-        android:name="com.sparkfusion.balina.test.ui.auth.AuthFragment"
+        android:name="com.sparkfusion.balina.test.ui.screen.auth.AuthFragment"
         android:label="@string/menu_auth" />
+
+    <fragment
+        android:id="@+id/imageInfoFragment"
+        android:name="com.sparkfusion.balina.test.ui.screen.info.ImageInfoFragment"
+        android:label="ImageInfoFragment">
+
+        <argument
+            android:name="imageModel"
+            app:argType="com.sparkfusion.balina.test.domain.model.image.GetImageModel" />
+
+    </fragment>
 </navigation>

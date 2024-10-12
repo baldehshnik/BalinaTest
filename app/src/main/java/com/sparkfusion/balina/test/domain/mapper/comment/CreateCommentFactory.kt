@@ -8,10 +8,10 @@ import javax.inject.Inject
 class CreateCommentFactory @Inject constructor() : MapFactory<CreateCommentDataEntity, CreateCommentModel> {
 
     override fun mapTo(input: CreateCommentDataEntity): CreateCommentModel = with(input) {
-        CreateCommentModel(id, date, text)
+        CreateCommentModel(text)
     }
 
     override fun mapFrom(input: CreateCommentModel): CreateCommentDataEntity = with(input) {
-        CreateCommentDataEntity(id, date, text)
+        CreateCommentDataEntity(text)
     }
 }

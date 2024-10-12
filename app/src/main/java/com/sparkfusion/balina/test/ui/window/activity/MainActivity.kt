@@ -44,19 +44,18 @@ class MainActivity : AppCompatActivity() {
     private var imageUri: Uri? = null
 
     private var _appBarConfiguration: AppBarConfiguration? = null
-    private val appBarConfiguration = checkNotNull(_appBarConfiguration)
+    private val appBarConfiguration get() = checkNotNull(_appBarConfiguration)
 
     private var _binding: ActivityMainBinding? = null
-    private val binding: ActivityMainBinding = checkNotNull(_binding) {
+    private val binding: ActivityMainBinding get() = checkNotNull(_binding) {
         throw ViewBindingIsNullException()
     }
 
     private var _fusedLocationClient: FusedLocationProviderClient? = null
-    private val fusedLocationClient: FusedLocationProviderClient =
-        checkNotNull(_fusedLocationClient)
+    private val fusedLocationClient: FusedLocationProviderClient get() = checkNotNull(_fusedLocationClient)
 
     private var _locationCallback: LocationCallback? = null
-    private val locationCallback: LocationCallback = checkNotNull(_locationCallback)
+    private val locationCallback: LocationCallback get() = checkNotNull(_locationCallback)
 
     private val viewModel: MainViewModel by viewModels()
 
@@ -70,9 +69,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.appBarMain.toolbar)
 
+        initNavigation()
         initLocationClients()
         initFabClickListener()
-        initNavigation()
 
         handleImageLoading()
     }

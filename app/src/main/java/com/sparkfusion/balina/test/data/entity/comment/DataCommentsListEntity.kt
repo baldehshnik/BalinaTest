@@ -2,8 +2,8 @@ package com.sparkfusion.balina.test.data.entity.comment
 
 import com.google.gson.annotations.SerializedName
 
-data class CreateCommentDataEntity(
+data class DataCommentsListEntity(
 
-    @SerializedName("text")
-    val text: String
+    @SerializedName("data")
+    val data: List<GetCommentDataEntity>
 )
