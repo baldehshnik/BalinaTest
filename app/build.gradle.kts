@@ -44,6 +44,8 @@ android {
 
 dependencies {
 
+    implementation(libs.google.maps)
+
     implementation(libs.androidx.swiperefreshlayout)
 
     implementation(libs.androidx.paging)

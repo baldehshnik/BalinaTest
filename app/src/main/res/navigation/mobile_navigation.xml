@@ -19,15 +19,15 @@
 
         <action
             android:id="@+id/action_galleryFragment_to_imageInfoFragment"
-            app:destination="@id/imageInfoFragment" />
+            app:destination="@id/nav_info" />
 
     </fragment>
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.sparkfusion.balina.test.ui.screen.slideshow.SlideshowFragment"
+        android:id="@+id/nav_map"
+        android:name="com.sparkfusion.balina.test.ui.screen.map.MapFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_map" />
 
     <fragment
         android:id="@+id/nav_auth"
@@ -35,7 +35,7 @@
         android:label="@string/menu_auth" />
 
     <fragment
-        android:id="@+id/imageInfoFragment"
+        android:id="@+id/nav_info"
         android:name="com.sparkfusion.balina.test.ui.screen.info.ImageInfoFragment"
         android:label="ImageInfoFragment">
 
