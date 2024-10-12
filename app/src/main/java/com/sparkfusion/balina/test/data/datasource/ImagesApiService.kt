@@ -1,18 +1,19 @@
 package com.sparkfusion.balina.test.data.datasource
 
 import com.sparkfusion.balina.test.data.entity.image.CreateImageDataEntity
-import com.sparkfusion.balina.test.data.entity.image.GetImageDataEntity
+import com.sparkfusion.balina.test.data.entity.image.DataGetImageEntity
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ImagesApiService {
 
     @GET("/api/image")
-    suspend fun readImages(): Response<List<GetImageDataEntity>>
+    suspend fun readImages(@Query("page") page: Int): Response<DataGetImageEntity>
 
     @POST("/api/image")
     suspend fun saveImage(@Body image: CreateImageDataEntity): Response<Unit>

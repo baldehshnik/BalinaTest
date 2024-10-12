@@ -42,6 +42,12 @@ android {
 
 dependencies {
 
+    implementation(libs.androidx.swiperefreshlayout)
+
+    implementation(libs.androidx.paging)
+
+    implementation(libs.google.android.gms)
+
     implementation(libs.bumptech.glide)
 
     implementation(libs.androidx.datastore)

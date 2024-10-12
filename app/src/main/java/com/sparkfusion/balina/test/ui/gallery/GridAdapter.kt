@@ -5,13 +5,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.sparkfusion.balina.test.R
 import com.sparkfusion.balina.test.domain.model.image.GetImageModel
+import com.sparkfusion.balina.test.ui.utils.SecondsToDateConverter
 
-class GridAdapter : ListAdapter<GetImageModel, GridAdapter.GridViewHolder>(DiffCallback()) {
+class GridAdapter(
+    private val handlePressAndHold: (GetImageModel) -> Unit
+) : PagingDataAdapter<GetImageModel, GridAdapter.GridViewHolder>(DiffCallback()) {
+
+    private val secondsToDateConverter = SecondsToDateConverter()
 
     inner class GridViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imageView: ImageView = view.findViewById(R.id.imageView)
@@ -25,8 +31,18 @@ class GridAdapter : ListAdapter<GetImageModel, GridAdapter.GridViewHolder>(DiffC
 
     override fun onBindViewHolder(holder: GridViewHolder, position: Int) {
         val item = getItem(position)
-        // image loading with glide
-        holder.textView.text = item.date.toString()
+        if (item != null) {
+            Glide.with(holder.itemView.context)
+                .load(item.url)
+                .placeholder(R.drawable.placeholder)
+                .into(holder.imageView)
+
+            holder.textView.text = secondsToDateConverter.convert(item.date)
+            holder.itemView.setOnLongClickListener {
+                handlePressAndHold(item)
+                true
+            }
+        }
     }
 
     class DiffCallback : DiffUtil.ItemCallback<GetImageModel>() {

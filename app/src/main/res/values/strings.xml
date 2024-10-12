@@ -10,6 +10,14 @@
     <string name="error">Error</string>
     <string name="should_not_be_empty">Should not be empty</string>
     <string name="password_is_too_short">Password is too short</string>
+    <string name="error_checking_location_settings">Error checking location settings</string>
+    <string name="location_not_included">Location not included</string>
+    <string name="failed_to_capture_photo">Failed to capture photo</string>
+    <string name="error_sending_image">Error sending image</string>
+    <string name="image_sent_successfully">Image sent successfully</string>
+    <string name="unable_to_create_image_uri">Unable to create image Uri</string>
+    <string name="image_deleted_successfully">Image deleted successfully</string>
+    <string name="failed_to_delete_image">Failed to delete image</string>
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>

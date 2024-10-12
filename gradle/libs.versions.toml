@@ -12,13 +12,16 @@ lifecycleLivedataKtx = "2.8.6"
 lifecycleViewmodelKtx = "2.8.6"
 navigationFragmentKtx = "2.8.2"
 navigationUiKtx = "2.8.2"
-hilt = "2.51.1"
+hilt = "2.52"
 ksp = "2.0.20-1.0.24"
 coil = "2.7.0"
 retrofit = "2.11.0"
 room = "2.6.1"
 dataStore = "1.1.1"
 glide = "4.16.0"
+gms = "21.0.1"
+paging = "3.3.2"
+swiperefreshlayout = "1.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -41,6 +44,9 @@ androidx-room = { group = "androidx.room", name = "room-runtime", version.ref = 
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 androidx-datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "dataStore" }
 bumptech-glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+google-android-gms = { group = "com.google.android.gms", name = "play-services-location", version.ref = "gms" }
+androidx-paging = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging" }
+androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

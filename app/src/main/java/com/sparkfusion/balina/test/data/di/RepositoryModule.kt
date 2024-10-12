@@ -1,6 +1,8 @@
 package com.sparkfusion.balina.test.data.di
 
+import com.sparkfusion.balina.test.data.repository.ImagesDataRepository
 import com.sparkfusion.balina.test.data.repository.LoginDataRepository
+import com.sparkfusion.balina.test.domain.repository.IImagesRepository
 import com.sparkfusion.balina.test.domain.repository.ILoginRepository
 import dagger.Binds
 import dagger.Module
@@ -13,4 +15,7 @@ interface RepositoryModule {
 
     @Binds
     fun bindLoginDataRepositoryToILoginRepository(loginDataRepository: LoginDataRepository): ILoginRepository
+
+    @Binds
+    fun bindImagesDataRepositoryToIImagesRepository(imagesDataRepository: ImagesDataRepository): IImagesRepository
 }
