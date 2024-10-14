@@ -6,12 +6,6 @@
     app:startDestination="@id/nav_auth">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.sparkfusion.balina.test.ui.screen.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
-
-    <fragment
         android:id="@+id/nav_gallery"
         android:name="com.sparkfusion.balina.test.ui.screen.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
@@ -26,7 +20,7 @@
     <fragment
         android:id="@+id/nav_map"
         android:name="com.sparkfusion.balina.test.ui.screen.map.MapFragment"
-        android:label="@string/menu_slideshow"
+        android:label="@string/menu_map"
         tools:layout="@layout/fragment_map" />
 
     <fragment
@@ -44,4 +38,5 @@
             app:argType="com.sparkfusion.balina.test.domain.model.image.GetImageModel" />
 
     </fragment>
+
 </navigation>

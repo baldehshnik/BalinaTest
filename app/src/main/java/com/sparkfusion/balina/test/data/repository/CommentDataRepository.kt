@@ -7,8 +7,8 @@ import androidx.paging.map
 import com.sparkfusion.balina.test.data.common.ApiResponseHandler
 import com.sparkfusion.balina.test.data.common.commonHandleExceptionCode
 import com.sparkfusion.balina.test.data.common.safeApiCall
-import com.sparkfusion.balina.test.data.datasource.CommentApiService
-import com.sparkfusion.balina.test.data.datasource.CommentsPagingSource
+import com.sparkfusion.balina.test.data.datasource.api.CommentApiService
+import com.sparkfusion.balina.test.data.datasource.paging.CommentsPagingSource
 import com.sparkfusion.balina.test.data.datasource.local.CommentDao
 import com.sparkfusion.balina.test.data.entity.comment.LocalCommentEntity
 import com.sparkfusion.balina.test.domain.mapper.comment.CreateCommentFactory

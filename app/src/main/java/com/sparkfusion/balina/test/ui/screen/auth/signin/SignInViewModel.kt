@@ -4,22 +4,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.sparkfusion.balina.test.domain.model.user.UserModel
-import com.sparkfusion.balina.test.domain.usecase.CheckUserLoginUseCase
-import com.sparkfusion.balina.test.domain.usecase.LoginUseCase
+import com.sparkfusion.balina.test.domain.usecase.login.CheckUserLoginUseCase
+import com.sparkfusion.balina.test.domain.usecase.login.LoginUseCase
+import com.sparkfusion.balina.test.ui.utils.withMainContext
 import com.sparkfusion.balina.test.utils.common.CommonViewModel
 import com.sparkfusion.balina.test.utils.dispatchers.IODispatcher
-import com.sparkfusion.balina.test.utils.dispatchers.MainDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.MainCoroutineDispatcher
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(
     @IODispatcher private val ioDispatcher: CoroutineDispatcher,
-    @MainDispatcher private val mainDispatcher: MainCoroutineDispatcher,
     private val signInUseCase: LoginUseCase,
     private val checkUserLoginUseCase: CheckUserLoginUseCase
 ) : CommonViewModel<SignInIntent>() {
@@ -41,29 +38,21 @@ class SignInViewModel @Inject constructor(
         _loginState.value = LoginState.Loading
         viewModelScope.launch(ioDispatcher) {
             if (username.isEmpty()) {
-                withContext(mainDispatcher) {
-                    _loginState.value = LoginState.IncorrectUsername
-                }
+                withMainContext(_loginState, LoginState.IncorrectUsername)
                 return@launch
             }
 
             if (password.length < 8) {
-                withContext(mainDispatcher) {
-                    _loginState.value = LoginState.IncorrectPassword
-                }
+                withMainContext(_loginState, LoginState.IncorrectPassword)
                 return@launch
             }
 
             signInUseCase.invoke(UserModel(username, password))
                 .onSuccess {
-                    withContext(mainDispatcher) {
-                        _loginState.value = LoginState.Success
-                    }
+                    withMainContext(_loginState, LoginState.Success)
                 }
                 .onFailure {
-                    withContext(mainDispatcher) {
-                        _loginState.value = LoginState.Error
-                    }
+                    withMainContext(_loginState, LoginState.Error)
                 }
         }
     }
@@ -72,14 +61,13 @@ class SignInViewModel @Inject constructor(
         viewModelScope.launch(ioDispatcher) {
             checkUserLoginUseCase.invoke()
                 .onSuccess {
-                    withContext(mainDispatcher) {
-                        _checkLoginState.value = if (it) CheckLoginState.Success else CheckLoginState.Failure
-                    }
+                    withMainContext(
+                        _checkLoginState,
+                        if (it) CheckLoginState.Success else CheckLoginState.Failure
+                    )
                 }
                 .onFailure {
-                    withContext(mainDispatcher) {
-                        _checkLoginState.value = CheckLoginState.Error
-                    }
+                    withMainContext(_checkLoginState, CheckLoginState.Error)
                 }
         }
     }
@@ -88,27 +76,3 @@ class SignInViewModel @Inject constructor(
         handleIntent(SignInIntent.CheckUserLogin)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

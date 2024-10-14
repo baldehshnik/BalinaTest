@@ -1,7 +1,7 @@
 package com.sparkfusion.balina.test.data.datastore
 
 import com.sparkfusion.balina.test.utils.dispatchers.IODispatcher
-import com.sparkfusion.balina.test.utils.exception.FailedDataStoreOperationException
+import com.sparkfusion.balina.test.utils.exception.datastore.FailedDataStoreOperationException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.withContext

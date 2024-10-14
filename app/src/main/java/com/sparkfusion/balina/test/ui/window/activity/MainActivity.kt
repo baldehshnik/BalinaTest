@@ -7,12 +7,14 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -47,12 +49,16 @@ class MainActivity : AppCompatActivity() {
     private val appBarConfiguration get() = checkNotNull(_appBarConfiguration)
 
     private var _binding: ActivityMainBinding? = null
-    private val binding: ActivityMainBinding get() = checkNotNull(_binding) {
-        throw ViewBindingIsNullException()
-    }
+    private val binding: ActivityMainBinding
+        get() = checkNotNull(_binding) {
+            throw ViewBindingIsNullException()
+        }
 
     private var _fusedLocationClient: FusedLocationProviderClient? = null
-    private val fusedLocationClient: FusedLocationProviderClient get() = checkNotNull(_fusedLocationClient)
+    private val fusedLocationClient: FusedLocationProviderClient
+        get() = checkNotNull(
+            _fusedLocationClient
+        )
 
     private var _locationCallback: LocationCallback? = null
     private val locationCallback: LocationCallback get() = checkNotNull(_locationCallback)
@@ -74,6 +80,7 @@ class MainActivity : AppCompatActivity() {
         initFabClickListener()
 
         handleImageLoading()
+        handleUsernameLoading()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -87,10 +94,28 @@ class MainActivity : AppCompatActivity() {
         val navView: NavigationView = binding.navView
 
         _appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.nav_home, R.id.nav_gallery, R.id.nav_map, R.id.nav_auth), drawerLayout
+            setOf(R.id.nav_gallery, R.id.nav_map), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.nav_auth -> {
+                    binding.appBarMain.fab.isVisible = false
+                    binding.appBarMain.toolbar.isVisible = false
+                }
+
+                R.id.nav_info -> {
+                    binding.appBarMain.fab.isVisible = false
+                }
+
+                else -> {
+                    binding.appBarMain.fab.isVisible = true
+                    binding.appBarMain.toolbar.isVisible = true
+                }
+            }
+        }
     }
 
     private fun initLocationClients() {
@@ -120,6 +145,21 @@ class MainActivity : AppCompatActivity() {
         binding.appBarMain.fab.setOnClickListener {
             if (checkLocationPermission()) checkLocationSettings()
             else requestLocationPermission()
+        }
+    }
+
+    private fun handleUsernameLoading() {
+        viewModel.usernameState.observe(this) {
+            when (it) {
+                LoadUsernameState.Failure -> {
+                    binding.root.findViewById<TextView>(R.id.drawerUsername).text =
+                        resources.getString(R.string.error)
+                }
+
+                is LoadUsernameState.Success -> {
+                    binding.root.findViewById<TextView>(R.id.drawerUsername).text = it.username
+                }
+            }
         }
     }
 
@@ -228,6 +268,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         stopLocationUpdates()
+        _binding = null
         _locationCallback = null
         _appBarConfiguration = null
         _fusedLocationClient = null

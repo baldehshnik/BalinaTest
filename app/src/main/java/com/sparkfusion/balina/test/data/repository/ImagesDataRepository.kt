@@ -7,13 +7,13 @@ import androidx.paging.map
 import com.sparkfusion.balina.test.data.common.ApiResponseHandler
 import com.sparkfusion.balina.test.data.common.commonHandleExceptionCode
 import com.sparkfusion.balina.test.data.common.safeApiCall
-import com.sparkfusion.balina.test.data.datasource.ImagePagingSource
-import com.sparkfusion.balina.test.data.datasource.ImagesApiService
+import com.sparkfusion.balina.test.data.datasource.paging.ImagePagingSource
+import com.sparkfusion.balina.test.data.datasource.api.ImagesApiService
 import com.sparkfusion.balina.test.data.datasource.local.ImageDao
 import com.sparkfusion.balina.test.data.datastore.Session
 import com.sparkfusion.balina.test.data.entity.image.LocalImageEntity
-import com.sparkfusion.balina.test.domain.mapper.image.CreateImageFactory
-import com.sparkfusion.balina.test.domain.mapper.image.GetImageFactory
+import com.sparkfusion.balina.test.domain.mapper.image.network.CreateImageFactory
+import com.sparkfusion.balina.test.domain.mapper.image.network.GetImageFactory
 import com.sparkfusion.balina.test.domain.model.image.CreateImageModel
 import com.sparkfusion.balina.test.domain.model.image.GetImageModel
 import com.sparkfusion.balina.test.domain.repository.IImagesRepository

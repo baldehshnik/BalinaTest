@@ -1,8 +1,8 @@
 package com.sparkfusion.balina.test.data.common
 
 import com.sparkfusion.balina.test.utils.common.Answer
-import com.sparkfusion.balina.test.utils.exception.BalinaException
-import com.sparkfusion.balina.test.utils.exception.UnexpectedException
+import com.sparkfusion.balina.test.utils.exception.common.BalinaException
+import com.sparkfusion.balina.test.utils.exception.common.UnexpectedException
 import retrofit2.Response
 
 class ApiResponseHandler<R>(

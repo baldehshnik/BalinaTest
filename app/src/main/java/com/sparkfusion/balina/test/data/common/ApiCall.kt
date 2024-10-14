@@ -1,13 +1,13 @@
 package com.sparkfusion.balina.test.data.common
 
 import com.sparkfusion.balina.test.utils.common.Answer
-import com.sparkfusion.balina.test.utils.exception.BadRequestException
-import com.sparkfusion.balina.test.utils.exception.BalinaException
-import com.sparkfusion.balina.test.utils.exception.IncorrectSignInException
-import com.sparkfusion.balina.test.utils.exception.LoginAlreadyExistsException
-import com.sparkfusion.balina.test.utils.exception.NetworkException
-import com.sparkfusion.balina.test.utils.exception.ServerException
-import com.sparkfusion.balina.test.utils.exception.UnexpectedException
+import com.sparkfusion.balina.test.utils.exception.network.BadRequestException
+import com.sparkfusion.balina.test.utils.exception.common.BalinaException
+import com.sparkfusion.balina.test.utils.exception.network.IncorrectSignInException
+import com.sparkfusion.balina.test.utils.exception.network.LoginAlreadyExistsException
+import com.sparkfusion.balina.test.utils.exception.network.NetworkException
+import com.sparkfusion.balina.test.utils.exception.network.ServerException
+import com.sparkfusion.balina.test.utils.exception.common.UnexpectedException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import java.io.IOException

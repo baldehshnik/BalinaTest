@@ -7,4 +7,5 @@ sealed interface MainIntent : UserIntent {
     data class SendImage(val image: Bitmap) : MainIntent
     data class ChangeCurrentLat(val value: Double) : MainIntent
     data class ChangeCurrentLng(val value: Double) : MainIntent
+    data object LoadUsername : MainIntent
 }

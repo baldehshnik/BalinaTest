@@ -23,14 +23,15 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MapFragment : Fragment() {
 
-    private val viewModel: SlideshowViewModel by viewModels()
+    private val viewModel: MapViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.fragment_map, container, false)
-        val supportMapFragment = childFragmentManager.findFragmentById(R.id.google_map) as SupportMapFragment?
+        val supportMapFragment =
+            childFragmentManager.findFragmentById(R.id.google_map) as SupportMapFragment?
 
         supportMapFragment?.getMapAsync { googleMap ->
             imagesObserver(googleMap)
@@ -57,7 +58,6 @@ class MapFragment : Fragment() {
 
     private fun loadMark(image: GetImageModel, googleMap: GoogleMap) {
         val latLng = LatLng(image.lat, image.lng)
-
         Glide.with(this)
             .asBitmap()
             .load(image.url)
@@ -67,7 +67,7 @@ class MapFragment : Fragment() {
                     val markerOptions = MarkerOptions()
                         .position(latLng)
                         .icon(BitmapDescriptorFactory.fromBitmap(resource))
-                        .title("Image ID: ${image.id}")
+                        .title(resources.getString(R.string.image_id_title, image.id.toString()))
 
                     googleMap.addMarker(markerOptions)
                 }

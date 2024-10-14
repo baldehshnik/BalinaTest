@@ -6,13 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.sparkfusion.balina.test.R
 import com.sparkfusion.balina.test.databinding.FragmentImageInfoBinding
 import com.sparkfusion.balina.test.domain.model.comment.GetCommentModel
@@ -20,7 +18,6 @@ import com.sparkfusion.balina.test.domain.model.image.GetImageModel
 import com.sparkfusion.balina.test.ui.exception.ViewBindingIsNullException
 import com.sparkfusion.balina.test.ui.utils.SecondsToDateConverter
 import com.sparkfusion.balina.test.ui.utils.shortSnackbar
-import com.sparkfusion.balina.test.ui.window.activity.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,11 +32,6 @@ class ImageInfoFragment : Fragment() {
         }
 
     private val viewModel: ImageInfoViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        (activity as MainActivity).findViewById<FloatingActionButton>(R.id.fab).isVisible = false
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -142,10 +134,5 @@ class ImageInfoFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onDestroy() {
-        (activity as MainActivity).findViewById<FloatingActionButton>(R.id.fab).isVisible = true
-        super.onDestroy()
     }
 }

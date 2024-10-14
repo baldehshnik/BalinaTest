@@ -1,9 +1,9 @@
 package com.sparkfusion.balina.test.data.di
 
 import com.sparkfusion.balina.test.data.common.AuthInterceptor
-import com.sparkfusion.balina.test.data.datasource.CommentApiService
-import com.sparkfusion.balina.test.data.datasource.ImagesApiService
-import com.sparkfusion.balina.test.data.datasource.LoginApiService
+import com.sparkfusion.balina.test.data.datasource.api.CommentApiService
+import com.sparkfusion.balina.test.data.datasource.api.ImagesApiService
+import com.sparkfusion.balina.test.data.datasource.api.LoginApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

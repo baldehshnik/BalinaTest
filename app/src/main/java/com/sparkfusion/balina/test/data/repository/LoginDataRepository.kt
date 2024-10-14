@@ -4,7 +4,7 @@ import com.sparkfusion.balina.test.data.common.ApiResponseHandler
 import com.sparkfusion.balina.test.data.common.handleSignInExceptionCode
 import com.sparkfusion.balina.test.data.common.handleSignUpExceptionCode
 import com.sparkfusion.balina.test.data.common.safeApiCall
-import com.sparkfusion.balina.test.data.datasource.LoginApiService
+import com.sparkfusion.balina.test.data.datasource.api.LoginApiService
 import com.sparkfusion.balina.test.domain.mapper.user.TokenFactory
 import com.sparkfusion.balina.test.domain.mapper.user.UserFactory
 import com.sparkfusion.balina.test.domain.model.user.TokenModel
@@ -40,21 +40,3 @@ class LoginDataRepository @Inject constructor(
             }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

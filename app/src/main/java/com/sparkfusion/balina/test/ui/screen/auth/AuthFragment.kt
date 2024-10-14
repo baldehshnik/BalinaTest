@@ -30,7 +30,10 @@ class AuthFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initPager()
+    }
 
+    private fun initPager() {
         val viewPager = viewBinding.viewPager
         val tabLayout = viewBinding.tabLayout
 

@@ -1,8 +1,8 @@
 package com.sparkfusion.balina.test.utils.common
 
-import com.sparkfusion.balina.test.utils.exception.AnswerHasNoMapperException
-import com.sparkfusion.balina.test.utils.exception.AnswerMappingException
-import com.sparkfusion.balina.test.utils.exception.BalinaException
+import com.sparkfusion.balina.test.utils.exception.answer.AnswerHasNoMapperException
+import com.sparkfusion.balina.test.utils.exception.answer.AnswerMappingException
+import com.sparkfusion.balina.test.utils.exception.common.BalinaException
 
 sealed class Answer<out T> {
 

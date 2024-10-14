@@ -8,7 +8,7 @@ import androidx.paging.cachedIn
 import com.sparkfusion.balina.test.domain.model.comment.CreateCommentModel
 import com.sparkfusion.balina.test.domain.model.comment.GetCommentModel
 import com.sparkfusion.balina.test.domain.repository.ICommentRepository
-import com.sparkfusion.balina.test.domain.usecase.ReadCommentsUseCase
+import com.sparkfusion.balina.test.domain.usecase.comment.ReadCommentsUseCase
 import com.sparkfusion.balina.test.ui.utils.withMainContext
 import com.sparkfusion.balina.test.utils.common.CommonViewModel
 import com.sparkfusion.balina.test.utils.dispatchers.IODispatcher
@@ -53,6 +53,7 @@ class ImageInfoViewModel @Inject constructor(
                 withMainContext(_deleteCommentState, DeleteCommentState.ImageNotFound)
                 return@launch
             }
+
             commentRepository.deleteComment(imageId!!, comment.id)
                 .onSuccess {
                     withMainContext(_deleteCommentState, DeleteCommentState.Success)

@@ -4,7 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.sparkfusion.balina.test.utils.exception.FailedDataStoreOperationException
+import com.sparkfusion.balina.test.utils.exception.datastore.FailedDataStoreOperationException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

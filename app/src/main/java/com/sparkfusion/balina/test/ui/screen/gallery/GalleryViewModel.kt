@@ -6,8 +6,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.sparkfusion.balina.test.domain.model.image.GetImageModel
-import com.sparkfusion.balina.test.domain.usecase.DeleteImageUseCase
-import com.sparkfusion.balina.test.domain.usecase.LoadImagesUseCase
+import com.sparkfusion.balina.test.domain.usecase.image.DeleteImageUseCase
+import com.sparkfusion.balina.test.domain.usecase.image.LoadImagesUseCase
 import com.sparkfusion.balina.test.ui.utils.withMainContext
 import com.sparkfusion.balina.test.utils.common.CommonViewModel
 import com.sparkfusion.balina.test.utils.dispatchers.IODispatcher

@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.sparkfusion.balina.test.domain.model.image.CreateImageModel
 import com.sparkfusion.balina.test.domain.repository.IImagesRepository
+import com.sparkfusion.balina.test.domain.usecase.login.GetUsernameUseCase
 import com.sparkfusion.balina.test.ui.utils.withMainContext
 import com.sparkfusion.balina.test.utils.common.CommonViewModel
 import com.sparkfusion.balina.test.utils.dispatchers.IODispatcher
@@ -19,11 +20,15 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     @IODispatcher private val ioDispatcher: CoroutineDispatcher,
-    private val imagesRepository: IImagesRepository
+    private val imagesRepository: IImagesRepository,
+    private val loadUsernameUseCase: GetUsernameUseCase
 ) : CommonViewModel<MainIntent>() {
 
     private val _sendImageState = MutableLiveData<SendImageState>(SendImageState.Empty)
     val sendImageState: LiveData<SendImageState> get() = _sendImageState
+
+    private val _usernameState = MutableLiveData<LoadUsernameState>()
+    val usernameState: LiveData<LoadUsernameState> get() = _usernameState
 
     private var currentLat: Double = 0.0
     private var currentLng: Double = 0.0
@@ -33,6 +38,19 @@ class MainViewModel @Inject constructor(
             is MainIntent.SendImage -> sendImage(intent.image)
             is MainIntent.ChangeCurrentLat -> currentLat = intent.value
             is MainIntent.ChangeCurrentLng -> currentLng = intent.value
+            MainIntent.LoadUsername -> loadUsername()
+        }
+    }
+
+    private fun loadUsername() {
+        viewModelScope.launch(ioDispatcher) {
+            loadUsernameUseCase.invoke()
+                .onSuccess {
+                    withMainContext(_usernameState, LoadUsernameState.Success(it))
+                }
+                .onFailure {
+                    withMainContext(_usernameState, LoadUsernameState.Failure)
+                }
         }
     }
 
@@ -77,5 +95,9 @@ class MainViewModel @Inject constructor(
         } else {
             Bitmap.createScaledBitmap(bitmap, (maxSize * bitmapRatio).toInt(), maxSize, true)
         }
+    }
+
+    init {
+        handleIntent(MainIntent.LoadUsername)
     }
 }

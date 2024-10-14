@@ -33,9 +33,7 @@ class CommentsAdapter(
         holder.dateTextView.text = comment?.date?.let { secondsToDateConverter.convert(it) }
 
         holder.itemView.setOnLongClickListener {
-            if (comment != null) {
-                onPressAndHoldHandler(comment)
-            }
+            if (comment != null) onPressAndHoldHandler(comment)
             true
         }
     }

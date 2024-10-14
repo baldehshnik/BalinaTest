@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -12,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.sparkfusion.balina.test.R
 import com.sparkfusion.balina.test.databinding.FragmentSignupBinding
 import com.sparkfusion.balina.test.ui.exception.ViewBindingIsNullException
+import com.sparkfusion.balina.test.ui.utils.shortSnackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,23 +35,29 @@ class SignUpFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewBinding.buttonRegister.setOnClickListener {
-            val password = viewBinding.editTextPassword.text.toString()
-            val confirmPassword = viewBinding.editTextConfirmPassword.text.toString()
-            if (password != confirmPassword) {
-                viewBinding.editTextConfirmPassword.error =
-                    resources.getString(R.string.passwords_do_not_match)
-                return@setOnClickListener
-            }
+        viewBinding.buttonRegister.setOnClickListener { onRegisterButtonClickListener() }
 
-            viewModel.handleIntent(
-                SignUpIntent.RegisterAccount(
-                    viewBinding.editTextLogin.text.toString(),
-                    viewBinding.editTextPassword.text.toString()
-                )
-            )
+        handleRegistrationState()
+    }
+
+    private fun onRegisterButtonClickListener() {
+        val password = viewBinding.editTextPassword.text.toString()
+        val confirmPassword = viewBinding.editTextConfirmPassword.text.toString()
+        if (password != confirmPassword) {
+            viewBinding.editTextConfirmPassword.error =
+                resources.getString(R.string.passwords_do_not_match)
+            return
         }
 
+        viewModel.handleIntent(
+            SignUpIntent.RegisterAccount(
+                viewBinding.editTextLogin.text.toString(),
+                viewBinding.editTextPassword.text.toString()
+            )
+        )
+    }
+
+    private fun handleRegistrationState() {
         viewModel.registrationState.observe(viewLifecycleOwner) {
             when (it) {
                 RegistrationState.IncorrectUsername -> {
@@ -73,11 +79,7 @@ class SignUpFragment : Fragment() {
                 }
 
                 RegistrationState.Error -> {
-                    Toast.makeText(
-                        requireContext(),
-                        resources.getString(R.string.error),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    viewBinding.root.shortSnackbar(R.string.error)
                 }
             }
 
