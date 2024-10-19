@@ -39,8 +39,4 @@ class MapViewModel @Inject constructor(
                 }
         }
     }
-
-    init {
-        handleIntent(MapIntent.LoadImages)
-    }
 }

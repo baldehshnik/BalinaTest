@@ -19,6 +19,14 @@ class LocalImagesDataRepository @Inject constructor(
     private val localImageEntityFactory: LocalImageEntityFactory
 ) : ILocalImagesRepository {
 
+    override suspend fun deleteImage(imageId: Int): Answer<Unit> = withContext(ioDispatcher) {
+        try {
+            Answer.Success(imageDao.deleteImage(imageId))
+        } catch (e: Exception) {
+            Answer.Failure(UnexpectedException())
+        }
+    }
+
     override suspend fun readImagesByUsername(username: String): Answer<List<GetImageModel>> = withContext(ioDispatcher) {
         try {
             Answer.Success(imageDao.readImages(username).map(localImageEntityFactory::mapTo))

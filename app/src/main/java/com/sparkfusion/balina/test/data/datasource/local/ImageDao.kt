@@ -14,4 +14,7 @@ interface ImageDao {
 
     @Query("SELECT * FROM images WHERE username = :username")
     suspend fun readImages(username: String): List<LocalImageEntity>
+
+    @Query("DELETE FROM images WHERE id = :imageId")
+    suspend fun deleteImage(imageId: Int)
 }

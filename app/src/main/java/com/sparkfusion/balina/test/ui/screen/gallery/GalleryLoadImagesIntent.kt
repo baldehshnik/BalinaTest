@@ -5,5 +5,6 @@ import com.sparkfusion.balina.test.utils.common.UserIntent
 
 interface GalleryLoadImagesIntent : UserIntent {
     data object LoadImages : GalleryLoadImagesIntent
+    data object ClearDeletionState : GalleryLoadImagesIntent
     data class DeleteImage(val model: GetImageModel) : GalleryLoadImagesIntent
 }

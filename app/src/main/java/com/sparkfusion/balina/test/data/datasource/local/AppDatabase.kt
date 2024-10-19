@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.sparkfusion.balina.test.data.entity.comment.LocalCommentEntity
 import com.sparkfusion.balina.test.data.entity.image.LocalImageEntity
 
-@Database(entities = [LocalImageEntity::class, LocalCommentEntity::class], version = 1, exportSchema = false)
+@Database(entities = [LocalImageEntity::class, LocalCommentEntity::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun imageDao(): ImageDao

@@ -37,6 +37,7 @@ class MapFragment : Fragment() {
             imagesObserver(googleMap)
         }
 
+        viewModel.handleIntent(MapIntent.LoadImages)
         return view
     }
 

@@ -32,8 +32,13 @@ class GalleryViewModel @Inject constructor(
     override fun handleIntent(intent: GalleryLoadImagesIntent) {
         when (intent) {
             GalleryLoadImagesIntent.LoadImages -> loadImages()
+            GalleryLoadImagesIntent.ClearDeletionState -> clearDeletionState()
             is GalleryLoadImagesIntent.DeleteImage -> deleteImage(intent.model)
         }
+    }
+
+    private fun clearDeletionState() {
+        _deleteImageLiveData.value = DeleteImageState.Empty
     }
 
     private fun loadImages() {
@@ -55,9 +60,5 @@ class GalleryViewModel @Inject constructor(
                     withMainContext(_deleteImageLiveData, DeleteImageState.Failure)
                 }
         }
-    }
-
-    init {
-        handleIntent(GalleryLoadImagesIntent.LoadImages)
     }
 }

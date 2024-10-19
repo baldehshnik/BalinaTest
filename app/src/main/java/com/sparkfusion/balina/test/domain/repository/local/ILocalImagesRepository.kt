@@ -6,4 +6,5 @@ import com.sparkfusion.balina.test.utils.common.Answer
 interface ILocalImagesRepository {
 
     suspend fun readImagesByUsername(username: String): Answer<List<GetImageModel>>
+    suspend fun deleteImage(imageId: Int): Answer<Unit>
 }

@@ -55,6 +55,11 @@ class GalleryFragment : Fragment() {
         handleImageDeleting(adapter)
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.handleIntent(GalleryLoadImagesIntent.LoadImages)
+    }
+
     private fun showDeleteConfirmationDialog(image: GetImageModel) {
         AlertDialog.Builder(requireContext())
             .setTitle(resources.getString(R.string.confirm_deletion))
@@ -92,6 +97,8 @@ class GalleryFragment : Fragment() {
                 }
             }
         }
+
+        viewModel.handleIntent(GalleryLoadImagesIntent.ClearDeletionState)
     }
 
     private fun handleLoadingState(
